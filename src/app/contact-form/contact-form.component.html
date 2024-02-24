@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="justify-content-center">
+        <form [formGroup]="contactForm">
+            <div class="form-group m-2">
+                <label>Name</label>
+                <input type="text" class="form-control" formControlName="full_name" placeholder="Full Name" />
+            </div>
+
+            <div class="form-group m-2">
+                <label>Email</label>
+                <input type="text" class="form-control" formControlName="email" name="Email" placeholder="Email" />
+            </div>
+            <div class="form-group m-2">
+                <label>Phone</label>
+                <input type="text" class="form-control" formControlName="phone" name="Phone" placeholder="Phone" />
+            </div>
+
+            <div class="form-group m-2">
+                <label>Comment</label>
+                <input type="text" class="form-control" formControlName="comment" name="Comment"
+                    placeholder="Comment" />
+            </div>
+            <div class="form-group m-2">
+                <input type="button" class="btn btn-primary" (click)="submitForm()" value="Submit" />
+            </div>
+        </form>
+    </div>
+
+    <div>
+        <h2>Added Users List</h2>
+
+        @if(allUserist && allUserist.length){
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Comment</th>
+                    <th>Action</th>
+                </tr>
+
+
+
+            </thead>
+
+            <tbody>
+                @for(user of allUserist; track i; let i = $index){
+                <tr>
+                    <td>{{user.name}} </td>
+                    <td>{{user.email}} </td>
+                    <td>{{user.phone}} </td>
+                    <td>{{user.comment}} </td>
+                    <td><button (click)="deleteRecord(user.email)">Delete</button></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        } @else {
+        <p>Data not added. Enter value from above form.</p>
+        }
+    </div>
+</div>

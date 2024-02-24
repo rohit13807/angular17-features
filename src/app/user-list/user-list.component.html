@@ -1,0 +1,36 @@
+<div class="user-list">
+    <h1>User List</h1>
+    @switch(showDataValue){
+    @case('show'){
+    <input type="button" class="btn btn-primary" (click)="displayList('show')" value="Hide List" />
+    }
+    @case('hide'){
+    <input type="button" class="btn btn-primary" (click)="displayList('hide')" value="Display List" />
+    }
+    }
+    {{showData}}
+    @defer (when showData) {
+
+    <h4>Users are available</h4>
+    <form>
+        <input type="text" formControlName="searchText" #searchValue />
+        <input type="button" class="m-2 btn btn-primary" (click)="searchUser(this.searchValue)" value="Search" />
+    </form>
+    @if(filteredData && filteredData.length) {
+
+
+    @for(user of filteredData; track i; let i = $index){
+    <p class="user-list">{{i+1}} - {{user.firstName }}</p>
+    }
+    } @else {
+    <p>No data Found</p>
+    }
+    } @loading {
+    <p>Loading...</p>
+    } @placeholder {
+    <p>Placeholder</p>
+    } @error {
+    <p class="error"> Somthing went wrong. Check internet connection</p>
+    }
+
+</div>
